@@ -1,6 +1,6 @@
 # Stock-Management-System
 
-##USING:
+## USING:
 -HTML
 -CSS3
 -JAVASCRIPT
