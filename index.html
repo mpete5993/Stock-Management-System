@@ -3,9 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Stock Management</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/sweetalert2.min.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
 </head>
 <body>
-    sdfgvbhj
+    <div class="container">
+        <div class="row" id="wrapper">
+            <div class="col-md-3" id="sidebar">
+                <div class="logo">
+                    <i class="fa fa-area-chart" aria-hidden="true"></i>
+                </div>
+                <div class="btn-container">
+                    <button onclick="showPanel(0, '#050e0e')"><i class="fa fa-plus-circle" aria-hidden="true"></i>  Add New Stock</button>
+                    <button onclick="showPanel(1, '#050e0e')"><i class="fa fa-user-plus" aria-hidden="true"></i> Add New user</button>
+                    <button onclick="showPanel(2, '#050e0e')"class=""><i class="fa fa-bar-chart" aria-hidden="true"></i>  Stock List</button>
+                </div>
+            </div>
+            <div class="col-md-9 stock-content">
+                <div class="tab-panel">
+                    <div class="tab-header">
+                        <i class="fa fa-plus-circle" aria-hidden="true"></i>  Add New Stock
+                    </div>
+                    <div class="tab-content">
+                        <form id="product-form" autocomplete="on" >
+                            <div class="alert-container"></div>
+                            
+                            <div class="input-container">
+                                <label for="">Product Name</label><br>
+                                <input type="text" id="product-name" placeholder="Enter Product Name">
+                            </div>
+                            <div class="input-container">
+                                <label for="">Price</label><br>
+                                <input type="number"  name="" id="price">
+                            </div>
+                            <div class="input-container">
+                                <label for="">Quantity</label><br>
+                                <input type="number" value="1" name="" id="qty">
+                            </div>
+                            <div class="input-container">
+                                <button class="add-btn">submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="tab-panel">
+                    tabs 2
+                </div>
+                <div class="tab-panel">
+                    <div class="tab-header">
+                        <i class="fa fa-bar-chart" aria-hidden="true"></i> Stock List
+                    </div>
+                    <div class="product-wrapper">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+<script src="js/main.js"></script>
+<script src="js/sweetalert2.min.js"></script>
+<script>
+    //get all buttons
+    let tabButtons = document.querySelectorAll('.btn-container button');
+    let tabPanels = document.querySelectorAll('.stock-content .tab-panel');
+
+    //button onclick
+    function  showPanel(panelIndex, colorCode){
+        //looping through all buttons
+        tabButtons.forEach(function(node){
+            //setting color & background to null by default
+            node.style.backgroundColor = "";
+            node.style.color = "";
+
+        });
+
+        //setting background & color of the current button to 
+        tabButtons[panelIndex].style.backgroundColor = colorCode;
+        tabButtons[panelIndex].style.color = "#ffffff";
+
+        //setting panel display to none by default
+        tabPanels.forEach(function(node){
+            node.style.display = "none";
+            node.style.color = "";
+
+        });
+        //setting selected panel to flex by default
+        tabPanels[panelIndex].style.display = "block";
+    }
+    //setting a default panel
+    showPanel(0, '#050e0e');
+</script>
 </html>
