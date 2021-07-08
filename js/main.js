@@ -1,6 +1,5 @@
 /* ======= Storage controller ========== */
 const StorageController = (() => {
-
   //public methods
   return {
     storeItem: (item) => {
@@ -60,6 +59,30 @@ const StorageController = (() => {
         //set items in localStorage
         localStorage.setItem('emails', JSON.stringify(emails));
       }
+    },
+    //fetch email list from localStorage 
+     getEmails : () => {
+      let emails;
+
+      if (localStorage.getItem('emails') === null) {
+        emails = [];
+      }
+      else {
+        emails = JSON.parse(localStorage.getItem('emails'));
+      }
+      emails.forEach((email) => {
+        //get the ul
+        let emailList = document.querySelector('.list-group.list-group-flush');
+        //create Element 
+        const li = document.createElement('li');
+        //add class to li
+        li.className = 'list-group-item';
+        //create text node and append to the li
+        li.appendChild(document.createTextNode(email));
+        //aapend li to ul
+        emailList.appendChild(li);
+
+      });
     }
   }
 })();
@@ -155,7 +178,7 @@ const ItemController = (() => {
       return data.currentItem;
     },
     getAveragePrice: () => {
-      
+
     },
     logData: () => {
       return data;
@@ -212,9 +235,9 @@ const UIController = (() => {
                             <span>
                               Price : <span class="text-success">R${item.price}</span>
                             </span>
-                            <span class="pull-right">
+                            <!-- <span class="pull-right">
                             Average Price : R<span class="text-success average-price"></span>
-                            </span>
+                            </span> -->
                         </div>
                     </div>
                     
@@ -345,10 +368,9 @@ const UIController = (() => {
                         <b>Price :</b>
                         <span class="text-success">R${item.price}</span>
                     </span>
-                    <span class="pull-right average-price">
-                        <b>Average Price :</b>
-                        <span class="text-success">R</span>
-                    </span>
+                    <!-- <span class="pull-right">
+                    Average Price : R<span class="text-success average-price"></span>
+                    </span> -->
                 </div>
             </div>
             
@@ -481,6 +503,9 @@ const UIController = (() => {
           </div>`;
         }
       })
+    },
+    showUsedEmails: () => {
+
     },
     clearInput: () => {
       document.querySelector(UISelectors.itemNameInput).value = '';
@@ -631,7 +656,6 @@ const AppController = ((ItemController, StorageController, UIController) => {
       UIController.buyItemsWarning();
     }
 
-
     e.preventDefault();
   }
 
@@ -696,6 +720,7 @@ const AppController = ((ItemController, StorageController, UIController) => {
     e.preventDefault();
   }
 
+
   //return initializer for the app
   //public methods
   return {
@@ -721,9 +746,12 @@ const AppController = ((ItemController, StorageController, UIController) => {
 
       //add average price to UI
       UIController.showAveragePrice(averageprice);
+      //
+      StorageController.getEmails();
 
       //Load event listeners
       loadEventListeners();
+      UIController.updateListItem();
     }
   }
 

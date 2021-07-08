@@ -24,7 +24,7 @@
                     <button onclick="showPanel(1, 'rgb(190, 12, 86)')"><i class="fa fa-users" aria-hidden="true"></i>
                         List of Users</button>
                     <button onclick="showPanel(2, 'rgb(190, 12, 86)')" class=""><i class="fa fa-bar-chart"
-                            aria-hidden="true"></i> Stock List</button>
+                            aria-hidden="true"></i> Stock Level</button>
                 </div>
             </div>
             <div class="col-md-9 stock-content">
@@ -69,12 +69,7 @@
                             <div class="col-md-12 col-sm-12" id="email-list-container">
                                 <div class="email-list-header"><i class="fa fa-envelope"></i>List of Used Emails</div>
                                 <div class="email-list">
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">johnDoe@gmail.com</li>
-                                        <li class="list-group-item">johnDoe@gmail.com</li>
-                                        <li class="list-group-item">johnDoe@gmail.com</li>
-                                        <li class="list-group-item">johnDoe@gmail.com</li>
-                                      </ul>
+                                    <ul class="list-group list-group-flush"></ul>
                                 </div>
                             </div>
                         </div>
@@ -85,7 +80,7 @@
                 <!-- ========= panel 3 ============= -->
                 <div class="tab-panel">
                     <div class="tab-header">
-                        <i class="fa fa-bar-chart" aria-hidden="true"></i> Stock List
+                        <i class="fa fa-bar-chart" aria-hidden="true"></i> Stock Level
                     </div>
                     <!-- ========= buy items container ============= -->
                     <div class="buy-items-container">
@@ -209,7 +204,7 @@
         tabPanels[panelIndex].style.display = "block";
     }
     //setting a default panel
-    showPanel(2, 'rgb(190, 12, 86)');
+    showPanel(1, 'rgb(190, 12, 86)');
     /*========== Tabs ============== */
 
 </script>
