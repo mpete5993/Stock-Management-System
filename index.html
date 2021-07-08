@@ -21,8 +21,8 @@
                 <div class="btn-container">
                     <button onclick="showPanel(0, 'rgb(190, 12, 86)')"><i class="fa fa-plus-circle"
                             aria-hidden="true"></i> Add New Product</button>
-                    <button onclick="showPanel(1, 'rgb(190, 12, 86)')"><i class="fa fa-user-plus"
-                            aria-hidden="true"></i> Add New user</button>
+                    <button onclick="showPanel(1, 'rgb(190, 12, 86)')"><i class="fa fa-users" aria-hidden="true"></i>
+                        List of Users</button>
                     <button onclick="showPanel(2, 'rgb(190, 12, 86)')" class=""><i class="fa fa-bar-chart"
                             aria-hidden="true"></i> Stock List</button>
                 </div>
@@ -64,37 +64,21 @@
 
                 <!-- ========= panel 2 ============= -->
                 <div class="tab-panel">
-
-                    <!-- <div class="buy-container">
+                    <div class="container">
                         <div class="row">
-                            <div class="col-md-12">
-                                <h6>Product 1</h6>
-                                <span>Price R4558</span>
-                            </div>
-                        </div>
-                        <div class="row" id="buy-input">
-                            
-                            <div class="col-md-4">
-                                <label for="">Product Name</label><br>
-                                <input type="email" name="" id="" placeholder="Product Name">
-                            </div>
-                            <div class="col-md-4">
-                                <label for="">Price</label><br>
-                                <input type="number" name="" id="price" placeholder="Price">
-                            </div>
-                            <div class="col-md-4">
-                                <label for="">Qty</label><br>
-                                <input type="number" class="edit-price" id="">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="">
-                                    <button class="buy-btn"><i class="fa fa-plus" aria-hidden="true"></i> add Items</button>
+                            <div class="col-md-12 col-sm-12" id="email-list-container">
+                                <div class="email-list-header"><i class="fa fa-envelope"></i>List of Used Emails</div>
+                                <div class="email-list">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">johnDoe@gmail.com</li>
+                                        <li class="list-group-item">johnDoe@gmail.com</li>
+                                        <li class="list-group-item">johnDoe@gmail.com</li>
+                                        <li class="list-group-item">johnDoe@gmail.com</li>
+                                      </ul>
                                 </div>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
                 </div>
                 <!-- ========= panel 2 ============= -->
 
@@ -186,11 +170,7 @@
                     </div>
                 </div>
                 <!-- ========= add items-container ============= -->
-
-
-                <div class="product-wrapper">
-
-                </div>
+                <div class="product-wrapper"> </div>
             </div>
             <!-- ========= panel 3 ============= -->
         </div>
