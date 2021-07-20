@@ -55,13 +55,13 @@ const StorageController = (() => {
         emails = JSON.parse(localStorage.getItem('emails'));
         //push new item
         emails.push(email);
-        UIController.buyItemsSuccess();
+
         //set items in localStorage
         localStorage.setItem('emails', JSON.stringify(emails));
       }
     },
     //fetch email list from localStorage 
-     getEmails : () => {
+    getEmails: () => {
       let emails;
 
       if (localStorage.getItem('emails') === null) {
@@ -97,7 +97,7 @@ const ItemController = (() => {
     this.qty = qty;
   }
 
-  //Data Structure - State 
+  // Data Structure - State 
   const data = {
     // items: [
     //   //initializing items manually
@@ -129,16 +129,17 @@ const ItemController = (() => {
       //create new Item
       newItem = new Item(ID, name, price, qty);
       //add to items array
-      data.items.push(newItem)
+      data.items.push(newItem);
 
       return newItem;
     },
     updateItem: (qty) => {
-      //qty to number
+      //qty  & Price to number
       qty = parseInt(qty);
       //find item
       let found = null;
       data.items.forEach(function (item) {
+
         if (item.id === data.currentItem.id) {
           numOfItems = parseInt(item.qty);
           item.qty = numOfItems + qty;
@@ -153,17 +154,19 @@ const ItemController = (() => {
       //find item
       let found = null;
       data.items.forEach(function (item) {
+
         if (item.id === data.currentItem.id) {
           numOfItems = parseInt(item.qty);
           item.qty = numOfItems - qty;
           found = item;
         }
+
       });
       return found;
     },
     getItemById: (id) => {
       let found;
-      //looop through the item
+      //loop through the item
       data.items.forEach((item) => {
         if (item.id === id) {
           found = item;
@@ -177,9 +180,6 @@ const ItemController = (() => {
     getCurrentItem: function () {
       return data.currentItem;
     },
-    getAveragePrice: () => {
-
-    },
     logData: () => {
       return data;
     }
@@ -188,7 +188,7 @@ const ItemController = (() => {
 
 /* ======= UI controller ========== */
 const UIController = (() => {
-  //
+
   const UISelectors = {
     itemList: '.product-wrapper',
     listItems: '.product-wrapper .product-container',
@@ -217,9 +217,8 @@ const UIController = (() => {
   return {
 
     populateItemList: (items) => {
-      //
-      let html = '';
 
+      let html = '';
       //loop through items array
       items.forEach((item) => {
         html += `
@@ -233,11 +232,8 @@ const UIController = (() => {
                               No of Items: <span class="text-success"> ${item.qty}</span>
                             </span>
                             <span>
-                              Price : <span class="text-success">R${item.price}</span>
+                              Price : <span class="text-success">R ${item.price}</span>
                             </span>
-                            <!-- <span class="pull-right">
-                            Average Price : R<span class="text-success average-price"></span>
-                            </span> -->
                         </div>
                     </div>
                     
@@ -245,7 +241,7 @@ const UIController = (() => {
             </div>
             <div class="row stock-list" id="btn-container">
                 <div class="col-md-2 col-sm-4">
-                    <button class="add-item"> add items</i></button>
+                    <button class="add-item"> add stock</i></button>
                 </div>
                 <div class="col-md-2 col-sm-4 buy-i">
                     <button class="remove-item" id=""> Buy items</i></button>
@@ -254,10 +250,8 @@ const UIController = (() => {
         </div>
         `
       });
-
       //Insert items in the stock
       document.querySelector(UISelectors.itemList).innerHTML = html;
-
     },
     getItemInput: () => {
 
@@ -277,13 +271,11 @@ const UIController = (() => {
         qty: document.querySelector(UISelectors.buyItemQtyInput).value,
       }
     },
-    showAveragePrice: (averageprice) => {
-      document.querySelectorAll(UISelectors.showAveragePrice).textContent = averageprice;
-    },
     clearUserEmail: () => {
       document.querySelector(UISelectors.userEmailInput).value = '';
       document.querySelector(UISelectors.buyItemQtyInput).value = '';
     },
+    /*======= alert messages ====*/
     buyItemsError: () => {
       let errorMsg = document.querySelector(UISelectors.errorMsg);
       errorMsg.innerHTML = `
@@ -296,13 +288,24 @@ const UIController = (() => {
         document.querySelector('.alert').remove();
       }, 3000);
     },
-    buyItemsWarning: () => {
-      let errorMsg = document.querySelector(UISelectors.errorMsg);
+    addStockWarning: () => {
+      let errorMsg = document.querySelector(UISelectors.warningMsg);
       errorMsg.innerHTML = `
       <div class="alert alert-warning">
          Please fill all the fields<i class="fa fa-exclamation-triangle pull-right" aria-hidden="true"></i>
       </div>`;
 
+      //hide alert after 3 sec
+      setTimeout(function () {
+        document.querySelector('.alert').remove();
+      }, 3000);
+    },
+    addStockSuccess: () => {
+      let errorMsg = document.querySelector(UISelectors.warningMsg);
+      errorMsg.innerHTML = ` 
+        <div class="alert alert-success">
+          Product added successfully.! <i class="fa fa-check-circle-o pull-right" aria-hidden="true"></i>
+        </div>`;
       //hide alert after 3 sec
       setTimeout(function () {
         document.querySelector('.alert').remove();
@@ -321,7 +324,7 @@ const UIController = (() => {
       }, 3000);
     },
     addItemsSuccess: () => {
-      let errorMsg = document.querySelector(UISelectors.addItemsMessage);
+      let errorMsg = document.querySelector(UISelectors.errorMsg);
       errorMsg.innerHTML = `
       <div class="alert alert-success">
         <span class="text-success"> Items added successfully <i class="fa fa-check-circle-o pull-right"
@@ -346,6 +349,7 @@ const UIController = (() => {
         document.querySelector('.alert').remove();
       }, 3000);
     },
+    /*======= alert messages ====*/
     addListItem: (item) => {
       //show the list
       document.querySelector(UISelectors.itemList).style.display = 'block';
@@ -408,11 +412,7 @@ const UIController = (() => {
                       </span>
                       <span>
                           <b>Price :</b>
-                          <span class="text-success">R${item.price}</span>
-                      </span>
-                      <span class="pull-right">
-                          <b>Average Price :</b>R
-                          <span class="text-success average-price"></span>
+                          <span class="text-success">R ${item.price}</span>
                       </span>
                   </div>
               </div>
@@ -420,85 +420,10 @@ const UIController = (() => {
           </div>
           <div class="row stock-list" id="btn-container">
               <div class="col-md-2 col-sm-4">
-                  <button class="add-item"><i class="fa fa-"> add items</i></button>
+                  <button class="add-item" style="font-size:12px"><i class="fa fa-"> add stock</i></button>
               </div>
               <div class="col-md-2 col-sm-4">
                   <button class="remove-item" > Buy items</i></button>
-              </div>
-          </div>`;
-          document.querySelector(UISelectors.buyItemsContainer).innerHTML = `
-          <div class="row">
-              <div class="col-md-12">
-                  <h6 id="show-product-name">${item.name}</h6>
-                  <span>Price : R</span> <span class="text-success" id="show-price">${item.price}</span>
-                  <span style="margin-left: 20px;">No of Items : </span> <span class="text-success"
-                      id="show-qty">${item.qty}</span>
-              </div>
-          </div>
-          <form>
-              <div class="row">
-                  <div class="col-md-12" id="buy-item-msg">
-
-                  </div>
-              </div>
-              <div class="row" id="buy-input">
-                  <div class="col-md-4">
-                      <label for="">Email</label><br>
-                      <input type="email" name="email" id="user-email" placeholder="Enter your Email"
-                          required>
-                  </div>
-                  <div class="col-md-4">
-                      <label for="">No of Items</label><br>
-                      <input type="number" class="price" id="buy-item-qty" value="1" required>
-                  </div>
-              </div>
-              <div class="row">
-                  <div class="col-md-2">
-                      <div class="">
-                          <button class="buy-btn">Buy <i class="fa fa-shopping-cart"
-                              aria-hidden="true"></i></button>
-                      </div>
-                  </div>
-          </form>
-          <div class="col-md-2">
-              <div class="">
-                  <button class="back-to-list"><i class="fa fa-long-arrow-left" aria-hidden="true"></i>
-                      Back </button>
-              </div>
-          </div>`;
-
-          document.querySelector(UISelectors.addItemsContainer).innerHTML = `
-          <div class="row">
-              <div class="col-md-12">
-                  <h6 id="show-item-name">${item.name}</h6>
-                  <span>Price : R</span> <span class="text-success" id="show-item-price">${item.price}</span>
-                  <span style="margin-left: 20px;">Number of Items : </span> <span class="text-success"
-                      id="show-item-qty">${item.qty}</span>
-              </div>
-          </div>
-          <div class="row">
-              <div class="col-lg-12">
-                  <div class="add-items-message"></div>
-              </div>
-          </div>
-          <div class="row" id="buy-input">
-              <div class="col-md-4">
-                  <label for="">Qty</label><br>
-                  <input type="number" class="edit-qty" id="price" value="1">
-              </div>
-          </div>
-          <div class="row">
-              <div class="col-md-2">
-                  <div class="">
-                      <button class="add-more-btn"><i class="fa fa-plus" aria-hidden="true"></i> add
-                          Items</button>
-                  </div>
-              </div>
-              <div class="col-md-2">
-                  <div class="">
-                      <button class="back-btn"><i class="fa fa-long-arrow-left" aria-hidden="true"></i> Back
-                      </button>
-                  </div>
               </div>
           </div>`;
         }
@@ -589,17 +514,13 @@ const AppController = ((ItemController, StorageController, UIController) => {
 
       //stoore in LocalStprage
       StorageController.storeItem(newItem);
-
-      //get average price
-      const averageprice = ItemController.getAveragePrice();
-
-      //add average price to UI
-      UIController.showAveragePrice(averageprice);
+      //show success message
+      UIController.addStockSuccess();
 
       //clear fields after submit
       UIController.clearInput();
     } else {
-      UIController.buyItemsWarning();
+      UIController.addStockWarning();
     }
 
     e.preventDefault();
@@ -620,7 +541,10 @@ const AppController = ((ItemController, StorageController, UIController) => {
 
       //add more items to existing product in LS
       StorageController.updateItemStorage(updatedItem);
+      //success alert
       UIController.addItemsSuccess();
+      //return to the List
+      UIController.hideAddStockContent();
 
       //clear input value
       document.querySelector('.edit-qty').value = '';
@@ -637,21 +561,25 @@ const AppController = ((ItemController, StorageController, UIController) => {
     //get user email
     const userEmail = document.querySelector('#user-email');
     const qtyInput = document.querySelector('#buy-item-qty');
+    let emails = JSON.parse(localStorage.getItem('emails'));
 
 
     if (userEmail.value != '' && qtyInput.value != '') {
+        const email = StorageController.storeUserEmailToStorage(userEmail.value, input.qty);
+        //update item
+        const updatedItem = ItemController.buyItem(input.qty);
+        //update ui
+        UIController.updateListItem(updatedItem);
 
-      const email = StorageController.storeUserEmailToStorage(userEmail.value, input.qty);
-      //update item
-      const updatedItem = ItemController.buyItem(input.qty);
-      //update ui
-      UIController.updateListItem(updatedItem);
+        //clear email input 
+        UIController.clearUserEmail();
+        //show success message
+        UIController.buyItemsSuccess();
+        //return to the List
+        UIController.hideAddStockContent();
 
-      //clear email input 
-      UIController.clearUserEmail();
-
-      //add more items to existing product in LS
-      StorageController.updateItemStorage(updatedItem);
+        //add more items to existing product in LS
+        StorageController.updateItemStorage(updatedItem);
     } else {
       UIController.buyItemsWarning();
     }
@@ -720,7 +648,6 @@ const AppController = ((ItemController, StorageController, UIController) => {
     e.preventDefault();
   }
 
-
   //return initializer for the app
   //public methods
   return {
@@ -731,8 +658,6 @@ const AppController = ((ItemController, StorageController, UIController) => {
 
       //fetch items from data structure
       const items = ItemController.getItems();
-
-
       //check if any items
       if (items.length === 0) {
         UIController.hideList();
@@ -741,12 +666,7 @@ const AppController = ((ItemController, StorageController, UIController) => {
         //populate List with items
         UIController.populateItemList(items);
       }
-      //get average price
-      const averageprice = ItemController.getAveragePrice();
-
-      //add average price to UI
-      UIController.showAveragePrice(averageprice);
-      //
+      //display used Emails
       StorageController.getEmails();
 
       //Load event listeners
@@ -754,7 +674,6 @@ const AppController = ((ItemController, StorageController, UIController) => {
       UIController.updateListItem();
     }
   }
-
 })(ItemController, StorageController, UIController);
 
 //initialize App

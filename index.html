@@ -19,25 +19,25 @@
                     <i class="fa fa-area-chart" aria-hidden="true"></i>
                 </div>
                 <div class="btn-container">
+
                     <button onclick="showPanel(0, 'rgb(190, 12, 86)')"><i class="fa fa-plus-circle"
-                            aria-hidden="true"></i> Add New Product</button>
-                    <button onclick="showPanel(1, 'rgb(190, 12, 86)')"><i class="fa fa-users" aria-hidden="true"></i>
+                            aria-hidden="true"></i> add new product</button>
+                    <button onclick="showPanel(1, 'rgb(190, 12, 86)')" class=""><i class="fa fa-bar-chart"
+                            aria-hidden="true"></i> Stock Levels</button>
+                    <button onclick="showPanel(2, 'rgb(190, 12, 86)')"><i class="fa fa-users" aria-hidden="true"></i>
                         List of Users</button>
-                    <button onclick="showPanel(2, 'rgb(190, 12, 86)')" class=""><i class="fa fa-bar-chart"
-                            aria-hidden="true"></i> Stock Level</button>
                 </div>
             </div>
+            
             <div class="col-md-9 stock-content">
                 <!-- ========= panel 1 ============= -->
                 <div class="tab-panel">
                     <div class="tab-header">
-                        <i class="fa fa-plus-circle" aria-hidden="true"></i> Add New Product
+                        <i class="fa fa-plus-circle" aria-hidden="true"></i> Add ew Product
                     </div>
                     <div class="tab-content">
                         <div class="row">
-                            <div class="col-md-12" id="add-item-msg">
-
-                            </div>
+                            <div class="col-md-12" id="add-item-msg"></div>
                         </div>
                         <form id="product-form" autocomplete="on">
                             <div class="alert-container"></div>
@@ -61,26 +61,13 @@
                     </div>
                 </div>
                 <!-- ========= panel 1 ============= -->
-
                 <!-- ========= panel 2 ============= -->
-                <div class="tab-panel">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12" id="email-list-container">
-                                <div class="email-list-header"><i class="fa fa-envelope"></i>List of Used Emails</div>
-                                <div class="email-list">
-                                    <ul class="list-group list-group-flush"></ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- ========= panel 2 ============= -->
-
-                <!-- ========= panel 3 ============= -->
                 <div class="tab-panel">
                     <div class="tab-header">
-                        <i class="fa fa-bar-chart" aria-hidden="true"></i> Stock Level
+                        <i class="fa fa-bar-chart" aria-hidden="true"></i> Stock Levels
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12" id="buy-item-msg" style="font-size:12px; margin-top: 10px;"></div>
                     </div>
                     <!-- ========= buy items container ============= -->
                     <div class="buy-items-container">
@@ -93,11 +80,6 @@
                             </div>
                         </div>
                         <form>
-                            <div class="row">
-                                <div class="col-md-12" id="buy-item-msg">
-
-                                </div>
-                            </div>
                             <div class="row" id="buy-input">
                                 <div class="col-md-4">
                                     <label for="">Email</label><br>
@@ -124,10 +106,8 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <!-- ========= buy items-container ============= -->
-
                 <!-- ========= add items-container ============= -->
                 <div class="add-items-container">
                     <div class="row">
@@ -140,7 +120,7 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
-                            <div class="add-items-message"></div>
+                            <div class="add-items-message" style="font-size: 12px;"></div>
                         </div>
                     </div>
                     <div class="row" id="buy-input">
@@ -166,6 +146,20 @@
                 </div>
                 <!-- ========= add items-container ============= -->
                 <div class="product-wrapper"> </div>
+            </div>
+            <!-- ========= panel 2 ============= -->
+            <!-- ========= panel 3 ============= -->
+            <div class="tab-panel">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12" id="email-list-container">
+                            <div class="email-list-header"><i class="fa fa-envelope"></i>List of Used Emails</div>
+                            <div class="email-list">
+                                <ul class="list-group list-group-flush"></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!-- ========= panel 3 ============= -->
         </div>
@@ -204,7 +198,7 @@
         tabPanels[panelIndex].style.display = "block";
     }
     //setting a default panel
-    showPanel(1, 'rgb(190, 12, 86)');
+    showPanel(0, 'rgb(190, 12, 86)');
     /*========== Tabs ============== */
 
 </script>
