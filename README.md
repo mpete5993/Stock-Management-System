@@ -9,3 +9,8 @@
 - Javascript(ES6 & Module Patterns)
 - Bootstrap
 - JAVASCRIPT
+
+## App URL
+```
+https://mpete5993.github.io/Stock-Management-System/
+```
